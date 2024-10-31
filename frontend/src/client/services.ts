@@ -403,6 +403,7 @@ export class UtilsService {
 export type TDataReadItems = {
   limit?: number
   skip?: number
+  status?: string
 }
 export type TDataCreateItem = {
   requestBody: ItemCreate
@@ -428,13 +429,14 @@ export class ItemsService {
   public static readItems(
     data: TDataReadItems = {},
   ): CancelablePromise<ItemsPublic> {
-    const { limit = 100, skip = 0 } = data
+    const { limit = 100, skip = 0, status = "todo" } = data
     return __request(OpenAPI, {
       method: "GET",
       url: "/api/v1/items/",
       query: {
         skip,
         limit,
+        status,
       },
       errors: {
         422: `Validation Error`,

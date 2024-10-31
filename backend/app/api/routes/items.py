@@ -12,27 +12,27 @@ router = APIRouter()
 
 @router.get("/", response_model=ItemsPublic)
 def read_items(
-    session: SessionDep, current_user: CurrentUser, skip: int = 0, limit: int = 100
+    session: SessionDep, current_user: CurrentUser, skip: int = 0, limit: int = 100, status: str = 'todo'
 ) -> Any:
     """
     Retrieve items.
     """
 
     if current_user.is_superuser:
-        count_statement = select(func.count()).select_from(Item)
+        count_statement = select(func.count()).select_from(Item).where(Item.status == status)
         count = session.exec(count_statement).one()
-        statement = select(Item).offset(skip).limit(limit)
+        statement = select(Item).where(Item.status == status).offset(skip).limit(limit)
         items = session.exec(statement).all()
     else:
         count_statement = (
             select(func.count())
             .select_from(Item)
-            .where(Item.owner_id == current_user.id)
+            .where((Item.owner_id == current_user.id) & (Item.status == status))
         )
         count = session.exec(count_statement).one()
         statement = (
             select(Item)
-            .where(Item.owner_id == current_user.id)
+            .where((Item.owner_id == current_user.id) & (Item.status == status))
             .offset(skip)
             .limit(limit)
         )

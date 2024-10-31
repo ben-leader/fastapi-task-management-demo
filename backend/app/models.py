@@ -67,7 +67,7 @@ class ItemBase(SQLModel):
     @field_validator("status")
     @classmethod
     def validate_status(cls, v):
-        allowed = {"todo", "in_progress", "complete", "canceled"}
+        allowed = {"todo", "complete"}
         if v not in allowed:
             raise ValueError(f"Status must be one of: {', '.join(allowed)}")
         return v
