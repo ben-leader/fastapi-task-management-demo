@@ -47,7 +47,7 @@ export const $Body_login_login_access_token = {
       ],
     },
   },
-} as const;
+} as const
 
 export const $HTTPValidationError = {
   properties: {
@@ -58,7 +58,7 @@ export const $HTTPValidationError = {
       },
     },
   },
-} as const;
+} as const
 
 export const $ItemCreate = {
   properties: {
@@ -80,8 +80,25 @@ export const $ItemCreate = {
         },
       ],
     },
+    due_date: {
+      type: "any-of",
+      contains: [
+        {
+          type: "string",
+          format: "date-time",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    status: {
+      type: "string",
+      default: "todo",
+      maxLength: 20,
+    },
   },
-} as const;
+} as const
 
 export const $ItemPublic = {
   properties: {
@@ -103,6 +120,23 @@ export const $ItemPublic = {
         },
       ],
     },
+    due_date: {
+      type: "any-of",
+      contains: [
+        {
+          type: "string",
+          format: "date-time",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    status: {
+      type: "string",
+      default: "todo",
+      maxLength: 20,
+    },
     id: {
       type: "string",
       isRequired: true,
@@ -114,7 +148,7 @@ export const $ItemPublic = {
       format: "uuid",
     },
   },
-} as const;
+} as const
 
 export const $ItemUpdate = {
   properties: {
@@ -143,8 +177,25 @@ export const $ItemUpdate = {
         },
       ],
     },
+    due_date: {
+      type: "any-of",
+      contains: [
+        {
+          type: "string",
+          format: "date-time",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    status: {
+      type: "string",
+      default: "todo",
+      maxLength: 20,
+    },
   },
-} as const;
+} as const
 
 export const $ItemsPublic = {
   properties: {
@@ -160,7 +211,7 @@ export const $ItemsPublic = {
       isRequired: true,
     },
   },
-} as const;
+} as const
 
 export const $Message = {
   properties: {
@@ -169,7 +220,7 @@ export const $Message = {
       isRequired: true,
     },
   },
-} as const;
+} as const
 
 export const $NewPassword = {
   properties: {
@@ -184,7 +235,7 @@ export const $NewPassword = {
       minLength: 8,
     },
   },
-} as const;
+} as const
 
 export const $Token = {
   properties: {
@@ -197,7 +248,7 @@ export const $Token = {
       default: "bearer",
     },
   },
-} as const;
+} as const
 
 export const $UpdatePassword = {
   properties: {
@@ -214,7 +265,7 @@ export const $UpdatePassword = {
       minLength: 8,
     },
   },
-} as const;
+} as const
 
 export const $UserCreate = {
   properties: {
@@ -251,7 +302,7 @@ export const $UserCreate = {
       minLength: 8,
     },
   },
-} as const;
+} as const
 
 export const $UserPublic = {
   properties: {
@@ -287,7 +338,7 @@ export const $UserPublic = {
       format: "uuid",
     },
   },
-} as const;
+} as const
 
 export const $UserRegister = {
   properties: {
@@ -316,7 +367,7 @@ export const $UserRegister = {
       ],
     },
   },
-} as const;
+} as const
 
 export const $UserUpdate = {
   properties: {
@@ -367,7 +418,7 @@ export const $UserUpdate = {
       ],
     },
   },
-} as const;
+} as const
 
 export const $UserUpdateMe = {
   properties: {
@@ -397,7 +448,7 @@ export const $UserUpdateMe = {
       ],
     },
   },
-} as const;
+} as const
 
 export const $UsersPublic = {
   properties: {
@@ -413,7 +464,7 @@ export const $UsersPublic = {
       isRequired: true,
     },
   },
-} as const;
+} as const
 
 export const $ValidationError = {
   properties: {
@@ -441,4 +492,4 @@ export const $ValidationError = {
       isRequired: true,
     },
   },
-} as const;
+} as const
