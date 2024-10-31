@@ -1,6 +1,7 @@
 import uuid
+from datetime import datetime
 
-from pydantic import EmailStr
+from pydantic import EmailStr, field_validator
 from sqlmodel import Field, Relationship, SQLModel
 
 
@@ -60,6 +61,16 @@ class UsersPublic(SQLModel):
 class ItemBase(SQLModel):
     title: str = Field(min_length=1, max_length=255)
     description: str | None = Field(default=None, max_length=255)
+    due_date: datetime | None = Field(default=None)
+    status: str = Field(default="todo", max_length=20)
+
+    @field_validator("status")
+    @classmethod
+    def validate_status(cls, v):
+        allowed = {"todo", "in_progress", "complete", "canceled"}
+        if v not in allowed:
+            raise ValueError(f"Status must be one of: {', '.join(allowed)}")
+        return v
 
 
 # Properties to receive on item creation
